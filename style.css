@@ -9,6 +9,10 @@ nav a{
 }
 
 /* Utility */
+
+a, a:hover{
+    text-decoration: none;
+}
 label{
     font-weight: 700;
 }
