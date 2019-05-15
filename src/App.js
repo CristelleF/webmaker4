@@ -12,7 +12,7 @@ import WebsiteEdit from "./components/user/WebsiteEdit";
 class App extends Component {
   state={
 
-  users= 
+  users: 
     [
       {_id: "123", username: "alice", password: "alice", firstName: "Alice", lastName: "Wonder", email: "alice@gmail.com"},
       {_id: "234", username: "bob", password: "bob", firstName: "Bob", lastName: "Marley", email: "bob@whatever.com"},
@@ -20,7 +20,7 @@ class App extends Component {
       {_id: "456", username: "shiyu", password: "shiyu", firstName: "Shiyu", lastName: "Wang", email: "swang@ulem.org"}
     ],
     
-  websites=
+  websites:
     [
       { _id: "123", name: "Facebook", developerId: "456", description: "Lorem" },
       { _id: "234", name: "Tweeter",  developerId: "456", description: "Lorem" },
@@ -31,14 +31,14 @@ class App extends Component {
       { _id: "789", name: "Chess", developerId: "234", description: "Lorem" }
     ],
     
-  pages=
+  pages:
     [
       { _id: "321", name: "Post 1", websiteId: "456", title: "Lorem" },
       { _id: "432", name: "Post 2", websiteId: "456", title: "Lorem" },
       { _id: "543", name: "Post 3", websiteId: "456", title: "Lorem" }
     ],
     
-  widgets=
+  widgets:
     [
       { _id: "123", widgetType: "HEADING", pageId: "321", size: 2, text: "GIZMODO"},
       { _id: "234", widgetType: "HEADING", pageId: "321", size: 4, text: "Lorem ipsum"},
@@ -53,13 +53,13 @@ render(){
   return(
 <Router>
   <Switch>
-      <Route exact path="/" render={props=>(<Login{...props} users={this.state.users})}
+      <Route exact path="/" render={props=>(<Login{...props} users={this.state.users}/>)}/>
       <Route exact path ="/login" render={props=>(<Login{...props}users={this.state.users}/>)}/>
       <Route exact path ="/register" render={props=>(<Register{...props}users={this.state.users}/>)}/>
       <Route exact path="/user/:uid" render={props=>(<Profile{...props}users={this.state.users}/>)}/>
       <Route exact path="/user/:uid/website" render={props=>(<WebsiteList{...props}users={this.state.users}/>)}/>
       <Route exact path="/user/:uid/website/new" render={props=>(<WebsiteNew{...props}users={this.state.users}/>)}/>
-      <Route exact path ="/user/:uid/website/:wid" render={props =>(<WebsiteEdit{...props}users={this.state.users})}/>
+      <Route exact path ="/user/:uid/website/:wid" render={props =>(<WebsiteEdit{...props}users={this.state.users}/>)}/>
   </Switch>
 </Router>
   

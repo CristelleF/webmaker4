@@ -23,8 +23,8 @@ export default class Login extends Component{
     }
     login=user=>{
         for(let item of this.props.users){
-            if(item.username===user.username && item.password===user.password)
-            this.props.history.push("/user/" + item._id)
+            if(item.username===user.username && item.password===user.password){
+            this.props.history.push("/user/" + item._id);
             return;
         }
     }
@@ -34,7 +34,7 @@ export default class Login extends Component{
         return(
             <div className="container">
         <h1>Login</h1>
-        <form onSubmit={this.onsubmit}>
+        <form onSubmit={this.onSubmit}>
             <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input 
@@ -61,12 +61,12 @@ export default class Login extends Component{
                 />
                  
             </div>
-             <button className="btn btn-primary btn-block" >Login<button>
+             <button className="btn btn-primary btn-block" >Login</button>
 
              <Link className="btn btn-success btn-block" to="/register">Register</Link>
 
         </form>
     </div> 
-        )
+        );
     }
 }
