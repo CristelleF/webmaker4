@@ -1,33 +1,83 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import uuid from "uuid";
+import axios from "axios";
 export default class WebsiteNew extends Component {
-  render() {
+    state = {
+        uid: this.props.match.params.uid,
+        websites: [],
+        name: "",
+        description: ""
+    };
+
+    async componentDidMount(){
+        const res = await axios.get(`/api/user/${this.state.uid}/website`);
+        this.filterWebsites(res.data);
+    }
+
+    filterWebsites = websites => {
+        const newWebsites = websites.filter(
+            website => website.developerId === this.state.uid
+        );
+        this.setState({
+            websites: newWebsites
+        });
+    };
+
+    onChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
+
+    onSubmit = async e => {
+        const { name, description, uid } = this.state;
+        e.preventDefault();
+        const newWeb = {
+            _id: uuid(),
+            name,
+            developerId: uid,
+            description
+        };
+        await axios.post("/api/website", newWeb);
+        this.props.history.push(`/user/${this.state.uid}/website`);
+    };
+
+    render() {
+        const { uid } = this.state;
     return (
 <div>
 <nav className="navbar navbar-dark bg-primary fixed-top row">
-<Link to={`/user/${this.state.uid}`}>
-    <i className="fas fa-chevron-left"></i>
+<div className="col-lg-4 d-none d-lg-block text-center text-white">
+<Link className="float-left" to={`/user/${uid}/website`}>
+    <i className="fas fa-chevron-left"/>
     </Link>
-<div className="col-lg-4 d-none d-sm-block">
-    <Link className="color-white" to={`/user/:uid/website`}><i className="fas fa-chevron-left"></i>
-    </Link> 
-
-    <div>
-    <h5 className="display-inline">Websites</h5>
-    <Link className="float-right pt-2" to={`/user/${uid}/website/new`}><i className="fas fa-plus"></i></Link>
+<span className=""><strong>Websites</strong></span>
+<span className="float-right"> <i className="fas fa-plus" />
+</span>
 </div>
-<div className="col-lg-8">
-    <Link className="d-lg-none" to={`/user/:uid/website`}><i className="fas fa-chevron-left"></i></Link>
-    <span className="navbar-brand mb-0 h1">New Website</span>
-    <Link to={`/user/123/website`} className="float-right"><i className="fas fa-check"></i></Link>
+<div className="col-lg-8 text-center text-white">
+    <Link className="d-lg-none float-left" to={`/user/${uid}/website`}><i className="fas fa-chevron-left"/></Link>
+    <span><strong>New Website</strong></span>
+<button className="float-right btn" form="newWebForm">
+    <i className="fas fa-check" />
+</button>
 </div>
     </nav>    
-<section className="row">
+<div className="row">
 <div className="col-lg-4 d-none d-lg-block">
 <div className="container">
     <ul className="list-group">
-    <li className="list-group-item">
-        <Link to={`/user/${uid}/website`}> Address Book App</Link>
+    {this.state.websites.map(website => (
+    <li key={website._id}
+     className="list-group-item">
+        <Link to={`/user/${uid}/website /${website._id}/page`}>
+        {website.name}</Link>
+<Link to={`/user/${uid}/website/${website._id}`} className="float-right">
+    <i className="fas fa-cog" /></Link>
+</li>
+))}
+    {/*</ul>Address Book App</Link>
         <Link className="float-right" to={`/user/:uid/website/`}><i className="fas fa-cog"></i></Link>
     </li>
     <li className="list-group-item">
@@ -41,29 +91,43 @@ export default class WebsiteNew extends Component {
     <li className="list-group-item">
         <Link to={`/user/:uid/website/`}> Script Testing App</Link>
         <Link className="float-right" to={`/user/:uid/website/`}><i className="fas fa-cog"></i></Link>
-    </li>
+    </li>*/}
     </ul>  
 </div>
 </div>
 <div className="col-lg-8">
-<div className="container">
-    <form>
+<div className="container-fluid">
+    <form id="newWebForm" onSubmit={this.onSubmit}>
     <div className="form-group">
-    <label htmlFor="name">Name</label> 
-    <input placeholder="Enter website name..." className="form-control" type="text"/></label>
+    <label htmlFor="name">
+    <b>Name</b>
+    </label> 
+    <input placeholder="Enter website name..." className="form-control" type="text"
+    onChange={this.onChange}
+    value={this.state.name}/>
 </div>
 <div className="form-group">
-    <label htmlFor="description">Discription</label>
-    <textarea rows="5" placeholder="Enter website description..." className="form-control" id="description" name="description"></textarea>
+    <label htmlFor="description"><b>Description</b>
+    </label>
+    <textarea rows="5" placeholder="Enter website description..." className="form-control" id="description" name="description"
+    onChange={this.onChange} value={this.state.description}/>
 </div>
+<Link to={`/user/${uid}/website`} className="btn btn-lg btn-warning">
+Cancel
+</Link>
+        <button className="btn btn-lg btn-success float-right">
+Submit </button>
 </form>
 </div>
-</section>
+</div>
+</div>
     <nav className="navbar navbar-dark bg-primary fixed-bottom">
-    <span className="navbar-brand mb-0 h1"></span>
-    <Link to={"/user"}><i className="fas fa-user"></i></Link>
+    <div className="full-width">
+    <Link className="color-white float-right"
+        to={`/user/${uid}`}><i className="fas fa-user"/></Link>
+        </div>
     </nav>
 </div>
-    
+    );
   }
 }

@@ -5,9 +5,9 @@ export default class WidgetYouTube extends Component {
     return (
       <div>
         <nav className="navbar navbar-light bg-light fixed-top">
-      <a href="widget-list.html"><i className="fas fa-chevron-left"></i></a>
+      <a to="widget-list.html"><i className="fas fa-chevron-left"></i></a>
       <span className="navbar-brand mb-0 h1">Widget Edit</span>
-      <a href="widget-list.html"><i className="fas fa-check"></i></a>
+      <a to="widget-list.html"><i className="fas fa-check"></i></a>
     </nav>
     <div className="container">
       <form>
@@ -46,12 +46,12 @@ export default class WidgetYouTube extends Component {
                   </div>
                   </div>
                   </div>
-            <a href="login.html" className="btn btn-danger btn-block">Delete</a>   
+            <a to="login.html" className="btn btn-danger btn-block">Delete</a>   
           </form>
     </div>
     <nav className="navbar navbar-light fixed-bottom bg-light">
       <div className="full-width">
-          <a className="float-right" href="../user/profile.html"><i className="fas fa-user text-primary"></i></a>
+          <a className="float-right" to="../user/profile.html"><i className="fas fa-user text-primary"></i></a>
       </div>
   </nav>
       </div>

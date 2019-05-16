@@ -4,7 +4,7 @@ body{
 }
 
 
-nav a{
+nav a, nav button i{
     color: white;    
 }
 
@@ -17,10 +17,17 @@ label{
     font-weight: 700;
 }
 
-.full-width{
-    width: 100%;
+.width-90{
+    width: 90%;
 }
-
+.absolute-right{
+    position: absolute;
+    right: 15px;
+    z-index: 2;
+}
+span{
+    cursor: pointer;
+}
 /* websites */
 nav.navbar-dark a{
     color: white;
@@ -28,14 +35,11 @@ nav.navbar-dark a{
 
 
 /* Pages */
-nav.navbar-light a{
+.navbar-light a, .navbar-light span, .navbar-light button i{
     color: black;
 }
 /*Widgets*/
 .icon-right{
-    position: absolute;
-    right: 15px;
-    z-index: 1;
     background: white;
     border-radius: 5px 0 0 5px;
     padding: 5px;

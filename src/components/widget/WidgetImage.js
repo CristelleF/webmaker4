@@ -1,64 +1,71 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 export default class WidgetImage extends Component {
-  render() {
+  onChange= e => {
+    this.props.onChange(e);
+}
+
+onSubmit= e => {
+    this.props.onSubmit(e)
+}
+
+onDelete = () => {
+    this.props.onDelete();
+}
+
+render() {
+    const {uid, wid, pid, name, width, url} = this.props  
     return (
       <div>
         <nav className="navbar navbar-light bg-light fixed-top">
-      <a href="widget-list.html"><i className="fas fa-chevron-left"></i></a>
-      <span className="navbar-brand mb-0 h1">Widget Edit</span>
-      <a href="widget-list.html"><i className="fas fa-check"></i></a>
+    <Link className="color-black" to={`/user/${uid}/website/${wid}/page/${pid}/widget`}>
+      <i className="fas fa-chevron-left"/>
+      </Link>
+      <span className="navbar-brand">Widget Edit</span>
+      <button className="color-black btn" form="imgForm"><i className="fas fa-check"/>
+      </button>
     </nav>
     <div className="container">
-      <form>
+      <form id="imgForm" onSubmit={this.onSubmit}>
         <div className="form-group">
-          <label htmlFor="Name">Name</label>
+          <label htmlFor="Name">
+          <b>Name</b></label>
           <input
-            placeholder="Enter widget name here..."
             name="name"
             id="name"
             type="text"
-            className="form-control"
-          />
+            onChange={this.onChange}
+            value={name}
+            className="form-control"/>
         </div>
         <div className="form-group">
-          <label htmlFor="text">Text</label>
+          <label htmlFor="url">
+          <b>Url</b></label>
           <input
-            placeholder="Enter text description of this image(optional)"
-            className="form-control"
-            type="text"
-            name="text"
-            id="text">
-
-        </div>
-        <div className="form-group">
-          <label htmlFor="url">URL</label>
-          <input
-            placeholder="Enter image location here..." name="url" id="url" type="text"
-            className="form-control">
-        </div>
-        <div className="form-group">
-          <label htmlFor="width">Width</label>
-          <div className="input-group">
-          <input className="form-control"  placeholder="Image Width" type="number">
-          <div className="input-group-append">
-            <span className="input-group-text">%</span>
-            </div>
+            name="url" onChange={this.onChange} value={url}
+            id="url" type="text"
+            className="form-control"/>
             </div>
         <div className="form-group">
-          <label htmlFor="file">File</label>
-          <input name="file" id="file" type="file" className="form-control">
-            </div>  
-            <a href="login.html" className="btn btn-primary btn-block">Upload Image</a>
-            <a href="login.html" className="btn btn-danger btn-block">Delete</a>   
+          <label htmlFor="width">
+          <b>Width</b></label>
+          <input className="form-control"  id="width"
+           value={width} onChange={this.onChange} name="width" type="text"/>
+            </div>
+            <button  onClick={this.onDelete} type="button" 
+            value={width} onChange={this.onChange}
+            className="btn btn-danger btn-block">Delete</button>   
           </form>
-    </div>
-    <nav className="navbar navbar-light fixed-bottom bg-light">
+          </div>
+    <footer className="navbar navbar-light fixed-bottom bg-light">
       <div className="full-width">
-          <a className="float-right" href="../user/profile.html"><i className="fas fa-user text-primary"></i></a>
+          <Link className="float-right color-black" 
+          to={`/user/${uid}`}>
+          <i className="fas fa-user"/>
+          </Link>
       </div>
-  </nav>
+  </footer>
       </div>
-    )
+    );
   }
 }

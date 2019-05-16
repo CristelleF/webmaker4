@@ -1,38 +1,64 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 export default class WidgetHeading extends Component {
-  render() {
+  onChange= e => {
+    this.props.onChange(e);
+}
+
+onSubmit= e => {
+    this.props.onSubmit(e)
+}
+
+onDelete = () => {
+    this.props.onDelete();
+}
+
+render() {
+    const {uid, wid, pid, name, text, size} = this.props
     return (
       <div>
        <nav className="navbar navbar-light bg-light fixed-top">
-        <a href="../website/website-list.html"><i className="fas fa-chevron-left"></i></a>
-        <span className="navbar-brand mb-0 h1">Widget Edit</span>
-        <a href="page-new.html"></span><i className="fas fa-check"></i> </a>
+        <Link className="color-black" to={`/user/${uid}/website/${wid}/page/${pid}/widget`}> <i className="fas fa-chevron-left"/></Link>
+        <span className="navbar-brand">Widget Edit</span>
+        <button className="color-black btn" form="headingForm"><i className="fas fa-check"/> </button>
     </nav>
     <div className="container">
-<form>
+<form id="headingForm" onSubmit={this.onSubmit}>
     <div className="form-group">
-        
- <div className="form-group">
-        <label htmlFor="name">Name</label>
-        <input placeholder="Enter here..." className="form-control" type="text" id="name" name="name">
+        <label htmlFor="name"><b>Name</b></label>
+        <input placeholder="Enter here..." className="form-control" 
+         value={name} className="form-control"
+        type="text" id="name" name="name"/>
     </div>
  <div className="form-group">
-        <label htmlFor="title">Text</label>
-        <input placeholder="Enter here..." className="form-control" type="text" id="text" name="text">
+        <label htmlFor="title">
+        <b>Text</b></label>
+        <input placeholder="Enter here..." className="form-control" 
+        onChange={this.onChange}
+        value={text}type="text" id="text" name="text"/>
      </div>
  <div className="form-group">
-        <label htmlFor="title">Size</label>
-        <input placeholder="Enter here..." className="form-control" type="number" id="text" name="size">
+        <label htmlFor="title">
+        <b>Size</b></label>
+        <input placeholder="Enter here..." className="form-control" 
+        value={size} onChange={this.onChange}
+        type="number" id="text" name="size"/>
      </div>
-        <a href="login.html" className="btn btn-danger btn-block">Delete</a>
+        <button type="button"  onClick={this.onDelete} 
+        className="btn btn-danger btn-block">Delete</button>
 </form>
       </div>
-      <nav className="navbar navbar-light bg-light fixed-bottom">
-            <span className="navbar-brand mb-0 h1"></span>
-            <a href="profile.html"><i className="fas fa-user text-primary"></i></a>
-          </nav> 
-      </div>
-    )
+      <footer className="navbar navbar-light fixed-bottom bg-light">
+<div className="full-width">
+    <Link
+        className="color-black float-right"
+        to={`/user/${uid}`}
+    >
+        <i className="fas fa-user" />
+    </Link>
+</div>
+</footer>
+</div>
+    );
   }
 }

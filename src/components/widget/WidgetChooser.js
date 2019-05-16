@@ -1,54 +1,76 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import uuid from "uuid";
 export default class WidgetChooser extends Component {
-  render() {
+  createWidget = type => {
+    const {uid, wid, pid} = this.props.match.params
+    const newWidget = {
+        _id: uuid(),
+        name: "",
+        widgetType: type,
+        pageId: pid,
+        text: "",
+        size: 1,
+        width: "",
+        url: ""
+    }
+    this.props.addWidget(newWidget);
+    this.props.history.push(`/user/${uid}/website/${wid}/page/${pid}/widget/${newWidget._id}`)
+}
+
+render() {
+    const {uid, wid, pid} = this.props.match.params
     return (
-      <div>
-            <nav className="navbar navbar-light bg-light fixed-top">
-      <a href="widget-list.html"><i className="fas fa-chevron-left"></i></a>
-      <span className="navbar-brand mb-0 h1">Choose Widget</span>
+<div>
+<nav className="navbar navbar-light bg-light fixed-top">
+      <Link className="color-black" to= {`/user/${uid}/website/${wid}/page/${pid}/widget`}> 
+      <i className="fas fa-chevron-left"/></Link>
+      <span className="navbar-brand padding-left">Choose Widget</span>
       <span></span>
     </nav>
-    <div className="container">
-      <ul className="list-group list-group-flush">
+<div className="container">
+    <ul className="list-group-flush">
+    <li className="list-group-item">
+<span onClick={this.createWidget.bind(this, "HEADING")}>
+  Heading
+</span>
+    </li>
         <li className="list-group-item">
-          <a href="widget-heading.html">Header</a>
-        </li>
-        <li className="list-group-item">
-          <a href="#">Label</a>
-        </li>
-        <li className="list-group-item">
-          <a href="#">HTML</a>
-        </li>
-        <li className="list-group-item">
-          <a href="#">Text Input</a>
-        </li>
-        <li className="list-group-item">
-          <a href="#">Link</a>
-        </li>
-        <li className="list-group-item">
-          <a href="#">Button</a>
-        </li>
-        <li className="list-group-item">
-          <a href="widget-image.html">Image</a>
-        </li>
-        <li className="list-group-item">
-          <a href="widget-youtube.html">YouTube</a>
-        </li>
-        <li className="list-group-item">
-          <a href="#">Data Table</a>
-        </li>
-        <li className="list-group-item">
-          <a href="#">Repeater</a>
+        <Link to="#">Label</Link>
+    </li>
+    <li className="list-group-item">
+        <Link to="#">Text Input</Link>
+    </li>
+    <li className="list-group-item">
+        <Link to="#">Link</Link>
+    </li>
+    <li className="list-group-item">
+        <Link to="#">Button</Link>
+    </li>
+    <li className="list-group-item">
+        <span onClick={this.createWidget.bind(this, "IMAGE")}>
+            Image
+        </span>
+    </li>
+    <li className="list-group-item">
+        <span onClick={this.createWidget.bind(this, "YOUTUBE")}>
+            Youtube
+        </span>
+    </li>
+    <li className="list-group-item">
+        <Link to="#">Data Table</Link>
+    </li>
+    <li className="list-group-item">
+        <Link to="#">Repeater</Link>
         </li>
       </ul>
     </div>
-    <nav className="navbar navbar-light fixed-bottom bg-light">
+    {/*<nav className="navbar navbar-light fixed-bottom bg-light">
             <div className="full-width">
-                <a className="float-right" href="../user/profile.html"><i className="fas fa-user text-primary"></i></a>
-            </div>
-        </nav>
+                < className="float-right" to="../user/profile.html"><i className="fas fa-user text-primary"/>
+            
+    </nav>*/}
       </div>
-    )
+    );
   }
 }
