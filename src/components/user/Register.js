@@ -69,9 +69,9 @@ render() {
                 onChange={this.onChange}/>
             </div>
             <div className="form-group">
-                <label htmlFor="password">Verify Password</label>
+                <label htmlFor="password2">Verify Password</label>
                 <input type="password" 
-                className="form-control" id="password" name="password"
+                className="form-control" id="password2" name="password2"
                 value = {password2}
                 onChange={this.onChange}/>
             </div>

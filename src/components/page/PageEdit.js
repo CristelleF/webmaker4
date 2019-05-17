@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import Axios from "axios";
 export default class PageEdit extends Component {
 
   state = {
@@ -12,7 +13,6 @@ export default class PageEdit extends Component {
 
 async componentDidMount() {
     await this.setState({
-        uid: this.props.match.params.uid,
         wid: this.props.match.params.wid,
         pid: this.props.match.params.pid
     })   
@@ -21,6 +21,7 @@ async componentDidMount() {
         name: page.name,
         title: page.title
     })
+    this.getPage();
 }
 
 getPage = () => {
@@ -31,7 +32,14 @@ getPage = () => {
     }
 
     return null;
-} 
+  getPage = async()=>{
+      const res = await Axios.get(`/api/page/${this.state.pid}`);
+      this.state({
+          name: res.data.name,
+          title: res.data.title
+      })
+  } 
+ 
 
 onChange = e => {
     this.setState({
@@ -39,12 +47,12 @@ onChange = e => {
     })
 }
 
-onDelete = () => {
-    this.props.deletePage(this.state.pid);
+onDelete =async () => {
+    await Axios.delete(`/api/page${this.state.pid}`);
     this.props.history.push(`/user/${this.state.uid}/website/${this.state.wid}/page`)
 }
 
-onSubmit = e => {
+onSubmit = async e => {
     e.preventDefault();
     const newPage = {
         _id: this.state.pid,
@@ -52,7 +60,7 @@ onSubmit = e => {
         websiteId: this.state.wid,
         title: this.state.title
     }
-    this.props.editPage(newPage);
+    await Axios.put("/api/page", newPage);
     this.props.history.push(`/user/${this.state.uid}/website/${this.state.wid}/page`)
 }
   render() {
@@ -100,5 +108,3 @@ onSubmit = e => {
 );
 }
 }
-
-     
