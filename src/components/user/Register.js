@@ -1,82 +1,81 @@
 import React, {Component} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
 import uuid from "uuid";
 export default class Register extends Component{
     state = {
         username: "",
-        email: "",
         password: "",
-        firstName: "",
-        lastName: ""
-    }
-
-    componentDidMount(){
-        const uid = this.props.match.params.uid;
-        // looking for use with given uid
-        for(let user of this.props.users) {
-            if(user._id === uid) {  
-                this.showUser(user);
-                return;
-            }
-        };
-        alert("No user is found with given id");
-    }
-
-    showUser = (user) => {
-        const {username, email, firstName, lastName, password} = user;
-        this.setState({
-            username, email, firstName, lastName, password
-        });
+        password2: ""
     }
 
     onChange = e => {
         this.setState({
             [e.target.name]: e.target.value
-        });
+        })
     }
 
     onSubmit = e => {
         e.preventDefault();
-        const {username, email, firstName, lastName, password} = this.state;
-        const newUser = {
-            _id: this.props.match.params.uid,
-            username,
-            password,
-            email,
-            firstName,
-            lastName
-        }
-        this.props.updateUser(newUser)
+        const {username, password, password2} = this.state;
+        this.register(username, password, password2);
     }
 
-    render() {
-        const {username, email, firstName, lastName} = this.state;
+    async register(username, password, password2) {
+        // Does passwords match
+        if(password !== password2) {
+            alert("The passwords are not match");
+            return;
+        }
+
+    // Check if username is available
+    const res = await axios.get(`/api/user?username=${username}`);
+        
+    if(res.data){
+        alert("Username is taken, please try another one");
+        return;
+    } else {
+        const newUser = {
+            _id: uuid(),
+            username,
+            password,
+            email: "",
+            firstName: "",
+            lastName: ""
+        };
+        const res2 = await axios.post("/api/user", newUser);
+        this.props.history.push(`/user/${res2.data._id}`);
+    }
+}
+
+render() {
+    const {username, password, password2} = this.state
         return(
             <div className="container">
         <h1> Register</h1>
-        <form>
+        <form onSubmit={this.onSubmit}>
             <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input placeholder="Enter your Username here..." 
+                <input 
                 className="form-control" type="text" id="username" name="username"
                 value = {username}
                 onChange={this.onChange}/>
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input placeholder="Enter your Password here..." type="password" 
+                <input type="password" 
                 className="form-control" id="password" name="password"
                 value = {password}
                 onChange={this.onChange}/>
             </div>
             <div className="form-group">
                 <label htmlFor="password">Verify Password</label>
-                <input placeholder="Verify your Password here..."type="password" 
+                <input type="password" 
                 className="form-control" id="password" name="password"
                 value = {password2}
                 onChange={this.onChange}/>
             </div>
-             <button className="btn btn-primary btn-block" to="/user/123">Register</button>
+             <button className="btn btn-primary btn-block" >Register</button>
              <Link className="btn btn-danger btn-block" to="/login">Cancel</Link>
 
         </form>

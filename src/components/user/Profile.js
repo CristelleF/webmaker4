@@ -85,12 +85,12 @@ async componentDidMount(){
              <label htmlFor="firstName">First Name</label>
             <input placeholder="Enter your Firstname here..." 
             className="form-control" type="text" id="firstName" 
-            value={name} onChange={this.onChange}name="firstName"/>
+            value={firstName} onChange={this.onChange} name="firstName"/>
             </div>
         <div className="form-group">
             <label htmlFor="lastName">Last Name</label>
             <input placeholder="Enter your Last Name here..." 
-            value={name} onChange={this.onChange} 
+            value={lastName} onChange={this.onChange} 
             className="form-control" type="text" id="lastName" name="lastName"/>
             </div>
             <Link className="btn btn-primary btn-block" to={`/user/${this.props.match.params.uid}/website`}>

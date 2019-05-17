@@ -32,6 +32,7 @@ export default class WidgetList extends Component {
     render() {
         const {uid, wid, pid, widgets} = this.state
     return (
+        <div>
         <nav className="navbar navbar-light fixed-top bg-light">
         <Link className="color-black" to={`/user/${uid}/website/${wid}/page`}>
             <i className="fas fa-chevron-left" />
@@ -118,12 +119,13 @@ return <div>
 </div>;
                     }})}
 </div>
-<footer className="navbar navbar-light bg-light">
+<footer className="navbar navbar-light fixed-bottom bg-light">
     <div className="full-width">
     <Link className="color-black float-right" to={`/user/${uid}`}>
-    <i className="fas fa-user"/></Link>
+    <Link className="fas fa-user"/></Link>
     </div>
 </footer>
       </div>
     );
+}
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
+import axios from "axios";
 export default class WebsiteEdit extends Component {
 state = {
     uid: this.props.match.params.uid,

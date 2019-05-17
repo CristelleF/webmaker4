@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import{BrowserRouter as Router, Route, Switch} from "react-router-dom";
 //Users
@@ -7,9 +7,9 @@ import Profile from "./components/user/Profile";
 import Register from "./components/user/Register";
 
 //Websites
-import WebsiteList from "./components/user/WebsiteList";
-import WebsiteNew from "./components/user/WebsiteNew";
-import WebsiteEdit from "./components/user/WebsiteEdit";
+import WebsiteList from "./components/website/WebsiteList";
+import WebsiteNew from "./components/website/WebsiteNew";
+import WebsiteEdit from "./components/website/WebsiteEdit";
 
 //Pages
 import PageList from "./components/page/PageList";
