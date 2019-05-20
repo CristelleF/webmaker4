@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import uuid from "uuid";
 import Axios from "axios";
+
 export default class PageNew extends Component {
+  
   state = {
     uid: "",
     wid: "",

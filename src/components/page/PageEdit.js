@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Axios from "axios";
-import { async } from 'q';
 export default class PageEdit extends Component {
 
   state = {
@@ -18,15 +17,6 @@ async componentDidMount() {
         wid: this.props.match.params.wid,
         pid: this.props.match.params.pid
     }) 
-    this.getPage();
-}  
- getPage= async()=>{
-    const res = await Axios.get(`/api/page/${this.state.pid}`);
-    this.setState({
-        name: res.data.name,
-        title: res.data.title
-    })
-
     this.getPage();
 }
 

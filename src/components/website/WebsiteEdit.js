@@ -52,11 +52,11 @@ delete = async () => {
 
 onSubmit = async e => {
     e.preventDefault();
-    {/*this.props.editWeb(
-        this.props.match.params.wid,
-        this.state.name,
-        this.state.description
-    );*/}
+    //this.props.editWeb(
+       // this.props.match.params.wid,
+        //this.state.name,
+      //  this.state.description
+    //);
     const newWeb = {
         _id: this.state.wid,
         name: this.state.name,

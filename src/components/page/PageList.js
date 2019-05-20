@@ -19,11 +19,11 @@ async componentDidMount() {
 }
 
 filterPage = async (wid) => {
-  {/*}  const currentPages = this.props.pages.filter(
-        (page) => (
-            page.websiteId === wid
-        )
-        )*/}
+  //  const currentPages = this.props.pages.filter(
+   //     (page) => (
+     //       page.websiteId === wid
+       // )
+        //)
     const res = await axios.get(`/api/website/${this.state.wid}/page`)    
     this.setState({
         pages: res.data
@@ -53,27 +53,8 @@ this.state.pages.map(
             </Link>
         </li>
     )
-    )}
-     {/*<li className="list-group-item">
-        <a to="../widget/widget-list.html">Blog Post</a>
-        <a className="float-right" to="page-edit.html"><i className="fas fa-cog"></i></a>
-    </li>
-    <li className="list-group-item">
-            <a to="../widget/widget-list.html">Blogs</a>
-            <a className="float-right" to="page-edit.html"><i className="fas fa-cog"></i></a>
-        </li>
-    <li className="list-group-item">
-    <a to="../widget/widget-list.html">Home</a>
-    <a className="float-right" to="page-edit.html"><i className="fas fa-cog"></i></a>
-        </li>
-    <li className="list-group-item">
-            <a to="../widget/widget-list.html">About</a>
-            <a className="float-right" to="page-edit.html"><i className="fas fa-cog"></i></a>
-        </li>
-    <li className="list-group-item">
-            <a to="../widget/widget-list.html">Contact Us</a>
-            <a className="float-right" to="page-edit.html"><i className="fas fa-cog"></i></a>
-    </li>*/}
+    )
+    }
         </ul>
     </div>
     <footer className="navbar navbar-light fixed-bottom bg-light">
