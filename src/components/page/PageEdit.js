@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 import Axios from "axios";
+import { async } from 'q';
 export default class PageEdit extends Component {
 
   state = {
@@ -13,34 +14,29 @@ export default class PageEdit extends Component {
 
 async componentDidMount() {
     await this.setState({
+        uid: this.props.match.params.uid,
         wid: this.props.match.params.wid,
         pid: this.props.match.params.pid
-    })   
-    const page = this.getPage();
+    }) 
+    this.getPage();
+}  
+ getPage= async()=>{
+    const res = await Axios.get(`/api/page/${this.state.pid}`);
     this.setState({
-        name: page.name,
-        title: page.title
+        name: res.data.name,
+        title: res.data.title
     })
+
     this.getPage();
 }
 
-getPage = () => {
-    for(let page of this.props.pages) {
-        if(page._id === this.state.pid) {
-            return page;
-        }
+getPage = async () => {
+    const res = await Axios.get(`/api/page/${this.state.pid}`);
+    this.setState({
+         name: res.data.name,
+         title: res.data.title
+     })
     }
-
-    return null;
-  getPage = async()=>{
-      const res = await Axios.get(`/api/page/${this.state.pid}`);
-      this.state({
-          name: res.data.name,
-          title: res.data.title
-      })
-  } 
- 
-
 onChange = e => {
     this.setState({
         [e.target.name]: e.target.value
