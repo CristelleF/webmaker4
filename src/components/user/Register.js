@@ -24,7 +24,7 @@ export default class Register extends Component{
     async register(username, password, password2) {
         // Does passwords match
         if(password !== password2) {
-            alert("The passwords are not match");
+            alert("The password entered is not a match");
             return;
         }
 
@@ -56,21 +56,21 @@ render() {
         <form onSubmit={this.onSubmit}>
             <div className="form-group">
                 <label htmlFor="username">Username</label>
-                <input 
+                <input placeholder="Enter here..."
                 className="form-control" type="text" id="username" name="username"
                 value = {username}
                 onChange={this.onChange}/>
             </div>
             <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <input type="password" 
+                <input type="password" placeholder="Enter your password here..."
                 className="form-control" id="password" name="password"
                 value = {password}
                 onChange={this.onChange}/>
             </div>
             <div className="form-group">
                 <label htmlFor="password2">Verify Password</label>
-                <input type="password" 
+                <input type="password" placeholder="Verify password..."
                 className="form-control" id="password2" name="password2"
                 value = {password2}
                 onChange={this.onChange}/>

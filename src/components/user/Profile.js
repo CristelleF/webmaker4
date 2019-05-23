@@ -95,7 +95,7 @@ async componentDidMount(){
             </div>
             <Link className="btn btn-primary btn-block" to={`/user/${this.props.match.params.uid}/website`}>
             Websites</Link>
-            <Link to="/login" className="btn btn-danger btn-block">>Logout</Link>
+            <Link to="/login" className="btn btn-danger btn-block">Logout</Link>
 </form>
 </div>
 <nav className="navbar navbar-dark bg-primary fixed-bottom">

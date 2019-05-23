@@ -61,7 +61,7 @@ export default class Login extends Component{
                 />
                  
             </div>
-             <button className="btn btn-primary btn-block" >Login</button>
+             <button className="btn btn-primary btn-block">Login</button>
 
              <Link className="btn btn-success btn-block" to="/register">Register</Link>
 

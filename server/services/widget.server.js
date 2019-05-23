@@ -8,7 +8,7 @@ module.exports=function(app){
       ];
 
 //Find all widgets by given page id
-app.ger("/api/page/:pid/widget",(req,res)=>{
+app.get("/api/page/:pid/widget",(req,res)=>{
     const pid=req.params["pid"]
     const result=widgets.filter(
         (widget)=>{
@@ -19,7 +19,7 @@ app.ger("/api/page/:pid/widget",(req,res)=>{
 })
 //create new widget
 app.post("/api/widget",(req,res)=>{
-    const newWidget=req.bosy;
+    const newWidget=req.body;
     widgets.push(newWidget);
     res.json(newWidget);
 })
@@ -46,14 +46,15 @@ app.put("/api/widget",(req,res)=>{
     )
     res.json(newWidget);
 })
-//Delete Widget by given id
-app.delete("/api/widget/:wgid",(req, res)=>{
-    const wgid=req.params["wgid"];
-    const widget=widgets.find(
-     (widget)=>(widget._id===wgid)   
+
+ //delete Widget by given Id
+ app.delete("/api/widget/:wgid", (req, res)=>{
+    const wgid= req.params["wgid"];
+    const widget= widgets.find(
+      (widget)=> (widget._id===wgid)
     );
-    const index=widgets.indexOf(widget);
+    const index = widgets.indexOf(widget);
     widgets.splice(index, 1);
-    res,json(widget);
-})
+    res.json(widget);
+  })
 }

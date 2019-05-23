@@ -27,7 +27,7 @@ filterWebsites = websites => {
 
 getWebsite = wid => {
     let currentWeb;
-    for (let website of this.props.websites) {
+    for (let website of this.state.websites) {
         if (website._id === wid) {
             currentWeb = website;
             break;
@@ -76,7 +76,7 @@ onSubmit = async e => {
     <Link className="float-left" to={`/user/${uid}/website`}>
         <i className="fas fa-chevron-left"/>
     </Link>
-    <span className="">Websites</span>
+    <span className="mb-0 h6"><strong>Websites</strong></span>
     <Link className="float-right" to={`/user/${uid}/website/new`}><i className="fas fa-plus"/>
    </Link>
 </div>
@@ -85,7 +85,7 @@ onSubmit = async e => {
     to={`/user/${uid}/website`}>
     <i className="fas fa-chevron-left"/>
     </Link>
-    <span className="">Edit Website</span>
+    <span className="text-white mb-0 h6"><strong>Edit Website</strong></span>
     <button form="editWebForm" className="float-right btn"><i 
     className="fas fa-check"/></button>
 </div>
@@ -136,7 +136,7 @@ className="float-right"> <i className="fas fa-cog" /></Link>
         value={this.state.description}
         onChange={this.onChange}/>
     </div>
-        <Link to={`/user/${uid}/website`} className="btn btn-lg btn-warning">Cancel>
+        <Link to={`/user/${uid}/website`} className="btn btn-lg btn-warning">Cancel
         </Link>
         <button type="button"onClick={this.delete} className="btn btn-danger btn-lg float-right">Delete</button>
             </form>
