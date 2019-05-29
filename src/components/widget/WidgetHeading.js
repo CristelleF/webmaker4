@@ -26,7 +26,7 @@ render() {
 <form id="headingForm" onSubmit={this.onSubmit}>
     <div className="form-group">
         <label htmlFor="name"><b>Name</b></label>
-        <input placeholder="Enter here..." className="form-control" 
+        <input placeholder="Enter here..." 
          value={name} className="form-control"
         type="text" id="name" name="name"/>
     </div>

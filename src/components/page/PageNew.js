@@ -42,7 +42,7 @@ render() {
     return (
       <div>
        <nav className="navbar fixed-top navbar-light bg-light">
-        <Link to="color-black" to={`/user/${uid}/website/${wid}/page`}>
+        <Link className="color-black" to={`/user/${uid}/website/${wid}/page`}>
         <i className="fas fa-chevron-left"/></Link>
         <span className="navbar-brand">New Page</span>
         <button className="color-black btn" form="newPageForm"> <i className="fas fa-check"/>
