@@ -1,53 +1,38 @@
 module.exports=function(app){
+const widgetModel= require("../models/widget/widget.model");
 
 //Find all widgets by given page id
-app.get("/api/page/:pid/widget",(req,res)=>{
-    const pid=req.params["pid"]
-    const result=widgets.filter(
-        (widget)=>{
-            return widget.pageId===pid
-        }
-    )
-    res.json(result)
-})
+app.get("/api/page/:pid/widget",async(req,res)=>{
+    const pid=req.params["pid"];
+    const widgets= await widgetModel.findWidgetsForPage(pid);
+    res.json(widgets);
+});
+
 //create new widget
-app.post("/api/widget",(req,res)=>{
+app.post("/api/widget",async(req,res)=>{
     const newWidget=req.body;
-    widgets.push(newWidget);
-    res.json(newWidget);
-})
+    const data= await widgetModel.createWidget(newWidget);
+    res.json(data);
+});
+
 //Get widget by id
-app.get("/api/widget/:wgid",(req,res)=>{
+app.get("/api/widget/:wgid",async(req,res)=>{
     const wgid=req.params["wgid"];
-    const widget = widgets.find(
-        (widget)=>(widget._id===wgid)
-
-    )
+    const widget=widgetModel.findWidget(wgid);
     res.json(widget);
-})
-//update widget
-app.put("/api/widget",(req,res)=>{
-    const newWidget=req.body;
-    widgets=widgets.map(
-        (widget)=>{
-        if(widget._id===newWidget._id){
-            widget=newWidget;
-        }
-        return widget;
-    }
+});
 
-    )
-    res.json(newWidget);
-})
+//update widget
+app.put("/api/widget",async(req,res)=>{
+    const newWidget=req.body;
+    const data= await widgetModel.updateWidget(newWidget);
+    res.json(data);
+});
 
  //delete Widget by given Id
- app.delete("/api/widget/:wgid", (req, res)=>{
+ app.delete("/api/widget/:wgid", async(req, res)=>{
     const wgid= req.params["wgid"];
-    const widget= widgets.find(
-      (widget)=> (widget._id===wgid)
-    );
-    const index = widgets.indexOf(widget);
-    widgets.splice(index, 1);
-    res.json(widget);
-  })
-}
+   const data= await widgetModel.deleteWidget(wgid);
+    res.json(data);
+  });
+};
