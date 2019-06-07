@@ -74,9 +74,10 @@ render() {
                 onChange={this.onChange}/>
             </div>
              <button className="btn btn-primary btn-block" >Register</button>
+             </form>
              <Link className="btn btn-danger btn-block" to="/login">Cancel</Link>
 
-        </form>
+        
     </div>
         );
         }

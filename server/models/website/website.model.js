@@ -20,4 +20,4 @@ WebsiteModel.deleteWebsite=(wid)=>{
 WebsiteModel.updateWebsite=(website)=>{
     return WebsiteModel.updateOne({_id:website._id}, website);
 }
-module.exports=Websitemodel;
+module.exports = WebsiteModel ;

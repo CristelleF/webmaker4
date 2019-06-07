@@ -50,3 +50,4 @@ module.exports = function(app) {
         userModel.udateUser(newUser);
         res.json(data);
     });
+}
