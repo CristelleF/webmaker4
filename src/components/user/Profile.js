@@ -68,6 +68,7 @@ async componentDidMount(){
         </button>
     </nav>
         <div className="container">
+            <div className="alert slert-success">Updated Successfully</div>
       <form id="profileForm" onSubmit={this.onSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>

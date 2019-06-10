@@ -1,18 +1,21 @@
 import React, {Component} from "react";
 import{Link} from "react-router-dom";
 import axios from "axios";
+
 export default class Login extends Component{
     state={
         username:"",
-        password:""
+        password:"",
+        showAlert: false
     }
 
     onChange= e=>{
         this.setState({
-        [e.target.name]:e.target.value
+        [e.target.name]:e.target.value,
+        showAlert: false
         })
     }
-    onSubmit= e=>{
+    onSubmit= e=>{ 
         e.preventDefault();
         const {username,password}=this.state;
         const user={
@@ -23,10 +26,14 @@ export default class Login extends Component{
     }
     login=async user=>{
         const res = await axios.get(`/api/user?username=${user.username}&password=${user.password}`)
+       
         if(res.data){
             this.props.history.push(`/user/${res.data._id}`);
         } else {
-            alert("invalid credential");
+            //alert("invalid credential");
+            this.setState({
+                showAlert:true
+            })
         }
     }
 
@@ -34,6 +41,10 @@ export default class Login extends Component{
         return(
             <div className="container">
         <h1>Login</h1>
+        this.state.showAlert?
+        (<div className="alert alert-danger">
+            Invalid Username and Password
+        </div>):null
         <form onSubmit={this.onSubmit}>
             <div className="form-group">
                 <label htmlFor="username">Username</label>
