@@ -68,10 +68,8 @@ export default class Register extends Component{
             email: "",
             firstName: "",
             lastName: "",
-            showUsernameAlert: false,
-            showPasswordAlert: false
         };
-        const res2 = await axios.post("/api/user", newUser);
+        const res2 = await axios.post("/api/register", newUser);
         this.props.history.push(`/user/${res2.data._id}`);
     }
 }

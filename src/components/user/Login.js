@@ -25,26 +25,34 @@ export default class Login extends Component{
         this.login(user);
     }
     login=async user=>{
-        const res = await axios.get(`/api/user?username=${user.username}&password=${user.password}`)
-       
-        if(res.data){
-            this.props.history.push(`/user/${res.data._id}`);
-        } else {
-            //alert("invalid credential");
+        try{const res = await axios.post("/api/login", user);
+        this.props.history.push(`/user/${res.data._id}`);
+        }catch{
             this.setState({
                 showAlert:true
             })
         }
+       // const res = await axios.post("/api/login", user);
+       
+       // if(res.data){
+           // this.props.history.push(`/user/${res.data._id}`);
+       // } else {
+            //alert("invalid credential");
+            //this.setState({
+               /// showAlert:true
+           // })
+       // }
     }
 
     render() {
         return(
             <div className="container">
         <h1>Login</h1>
+        {
         this.state.showAlert?
         (<div className="alert alert-danger">
             Invalid Username and Password
-        </div>):null
+        </div>):null}
         <form onSubmit={this.onSubmit}>
             <div className="form-group">
                 <label htmlFor="username">Username</label>
